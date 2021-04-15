@@ -73,6 +73,7 @@ public class ControladorAvion implements ActionListener {
             Avion aviones = new Avion(idAvion, AnioAvion, marcaAvion, modeloAvion, numPasajeros, numFilas, numAsientos);
             try {
                 modelo.insertarAvion(aviones);
+                MostrarDetallesAviones();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -96,6 +97,7 @@ public class ControladorAvion implements ActionListener {
             Avion aviones = new Avion(idAvion, AnioAvion, marcaAvion, modeloAvion, numPasajeros, numFilas, numAsientos);
             try {
                 modelo.modificarAvion(aviones);
+                MostrarDetallesAviones();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -110,6 +112,7 @@ public class ControladorAvion implements ActionListener {
             String idAvion = vAviones.getTxtIdAvion().getText();
             try {
                 modelo.eliminarAvion(idAvion);
+                MostrarDetallesAviones();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

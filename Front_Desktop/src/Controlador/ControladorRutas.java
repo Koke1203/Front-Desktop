@@ -59,6 +59,7 @@ public class ControladorRutas implements ActionListener {
                     Integer.parseInt(horaSalida), Integer.parseInt(minutosSalida), fechaLlegada);
             try {
                 modelo.insertarRuta(ruta);
+                MostrarDetalleRutas();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -87,6 +88,7 @@ public class ControladorRutas implements ActionListener {
                     Integer.parseInt(horaSalida), Integer.parseInt(minutosSalida), fechaLlegada);
             try {
                 modelo.modificarRuta(ruta);
+                MostrarDetalleRutas();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -102,6 +104,7 @@ public class ControladorRutas implements ActionListener {
         String numRuta = vRutas.getTxtNumRuta().getText();
         try {
             modelo.eliminarRuta(numRuta);
+            MostrarDetalleRutas();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

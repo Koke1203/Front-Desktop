@@ -29,6 +29,7 @@ public class ControladorAdministrador implements ActionListener {
     private Login vLogin;
     private Rutas vRutas;
     private Aviones vAviones;
+    private ControladorAvion cAviones;
     private RegistroAdministrador vRegistroAdministrador;
     private ControladorRegistroAdministrador cRegistroAdministrador;
     private Vuelos vVuelos;
@@ -55,20 +56,17 @@ public class ControladorAdministrador implements ActionListener {
         vAdministrador.setVisible(false);
         
     }
-    public void IniciarAviones(){}
+    public void IniciarAviones(){
+        vAviones = new Aviones();
+        this.vAdministrador.setVisible(false);
+        cAviones = new ControladorAvion(vAviones, vAdministrador, modelo);
+    }
     
     public void IniciarRutas(){
     vRutas = new Rutas();
     this.vAdministrador.setVisible(false);
     cRuta = new ControladorRutas(vRutas, vAdministrador, modelo);
-    }
-    
-    public void IniciarEditarAdmin(){}
-    public void IniciarRegistroAdmin(){}
-    
-
-
-    
+    }  
     
     private void RegistrarAdministrador(){
         vRegistroAdministrador = new RegistroAdministrador();
@@ -94,6 +92,7 @@ public class ControladorAdministrador implements ActionListener {
                 IniciarRutas();
                 break;
             case "Aviones":
+                IniciarAviones();
                 break;
             case "Registros":
                 RegistrarAdministrador();
