@@ -41,7 +41,6 @@ public class Principal extends javax.swing.JFrame implements Observer{
         btnInicioSesion.addActionListener(controlador);
         btnRegistro.addActionListener(controlador);
         txtFilter.addKeyListener(controlador);
-        
     }
     
     public void setModelo(Modelo modelo){

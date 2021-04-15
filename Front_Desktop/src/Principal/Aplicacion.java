@@ -8,8 +8,9 @@ package Principal;
 import Controlador.ControladorPrincipal;
 import Modelo.Modelo;
 import Vista.Principal;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -21,16 +22,17 @@ public class Aplicacion {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        try {
+            javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         Modelo modelo = new Modelo();
         Principal vPrincipal = new Principal();
         ControladorPrincipal controlador = new ControladorPrincipal(modelo, vPrincipal);
-
-//        Modelo modelo = new Modelo();
-//        ArrayList<DetalleVuelo> detalles = modelo.listarDetalleVuelos();
-//        Iterator it = detalles.iterator();
-//        while(it.hasNext()){
-//            System.out.println(it.next());
-//        }
     }
     
 }

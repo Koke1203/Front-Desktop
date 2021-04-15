@@ -39,7 +39,7 @@ public class ComprarVuelo extends javax.swing.JFrame implements Observer{
         this.controlador = controlador;
         getBtnRegresar().addActionListener(controlador);
         getBtnComprar().addActionListener(controlador);
-        
+        getTxtFiltroTable().addKeyListener(controlador);
     }
 
     public void setModelo(Modelo modelo) {

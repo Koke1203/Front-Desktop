@@ -10,6 +10,7 @@ import Modelo.Modelo;
 import Vista.Principal;
 import Vista.Login;
 import Vista.RegistroCliente;
+import Vista.VistaAsientos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -38,6 +39,8 @@ public class ControladorPrincipal implements ActionListener, KeyListener{
     private ControladorLogin cLogin;
     private RegistroCliente vRegistro;
     private ControladorRegistroCliente cRegistroCliente;
+    private VistaAsientos vAsientos;
+    private ControladorAsientos cAsientos;
     
     public ControladorPrincipal(Modelo modelo, Principal vPrincipal){
         this.modelo = modelo;
@@ -58,6 +61,8 @@ public class ControladorPrincipal implements ActionListener, KeyListener{
         cRegistroCliente = new ControladorRegistroCliente(vRegistro, vPrincipal, modelo);
         this.vPrincipal.setVisible(false);
     }
+    
+
 
     private void MostrarDetallesDeVuelos() {
         ArrayList<DetalleVuelo> detallesVuelo = modelo.listarDetalleVuelos();
@@ -99,8 +104,7 @@ public class ControladorPrincipal implements ActionListener, KeyListener{
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(dm);
         tableDetalleVuelos.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter("(?i)" + query));
-        //tr.sort();
-}
+    }
     
         @Override
     public void actionPerformed(ActionEvent ae) {
@@ -110,7 +114,7 @@ public class ControladorPrincipal implements ActionListener, KeyListener{
                 break;
             case "Registrarse":
                 this.Registrarse();
-                break;                
+                break;
         }
     }
     
@@ -131,5 +135,7 @@ public class ControladorPrincipal implements ActionListener, KeyListener{
             filter(query);
         }
     }
+
+
     
 }

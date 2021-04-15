@@ -44,7 +44,7 @@ public class ControladorCliente implements ActionListener{
         MostrarHistoricosVuelos();
     }
     
-    private void MostrarHistoricosVuelos() {
+    public void MostrarHistoricosVuelos() {
         ArrayList<DetalleHistoricoCompra> detalleHistoricoCompras = modelo.listarDetalleHistoricoComprasCliente(cliente.getIdCliente());
         if ((detalleHistoricoCompras != null) && (!detalleHistoricoCompras.isEmpty())) {
             String[] nombreColumnas = {"ID Vuelo", "Origen", "Destino", "Precio", "Fecha"};
