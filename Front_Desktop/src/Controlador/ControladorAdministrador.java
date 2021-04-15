@@ -12,6 +12,7 @@ import Vista.Aviones;
 import Vista.Login;
 import Vista.RegistroAdministrador;
 import Vista.Rutas;
+import Vista.Vuelos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +31,8 @@ public class ControladorAdministrador implements ActionListener {
     private Aviones vAviones;
     private RegistroAdministrador vRegistroAdministrador;
     private ControladorRegistroAdministrador cRegistroAdministrador;
+    private Vuelos vVuelos;
+    private ControladorVuelos cVuelos;
     
  ControladorAdministrador(Administrador vAdministrador, Login vLogin, Modelo modelo, Usuario administrador) {
         this.modelo = modelo;
@@ -46,7 +49,12 @@ public class ControladorAdministrador implements ActionListener {
     }
 
     //private Vuelos vVuelos;
-    public void IniciarVuelos(){}
+    public void IniciarVuelos(){
+        vVuelos = new Vuelos();
+        cVuelos = new ControladorVuelos(vVuelos, vAdministrador, modelo);
+        vAdministrador.setVisible(false);
+        
+    }
     public void IniciarAviones(){}
     
     public void IniciarRutas(){
@@ -80,10 +88,10 @@ public class ControladorAdministrador implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         switch(ae.getActionCommand()){
             case "Vuelos":
-                
+               IniciarVuelos();
                 break;
             case "Rutas":
-                this.IniciarRutas();
+                IniciarRutas();
                 break;
             case "Aviones":
                 break;

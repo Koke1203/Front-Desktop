@@ -40,7 +40,6 @@ public class Administrador extends javax.swing.JFrame implements Observer{
         
         btnAviones.addActionListener(controlador);
         btnCerrarSesion.addActionListener(controlador);
-        btnEditar.addActionListener(controlador);
         btnRegistros.addActionListener(controlador);
         btnRutas.addActionListener(controlador);
         btnVuelos.addActionListener(controlador);
@@ -64,13 +63,11 @@ public class Administrador extends javax.swing.JFrame implements Observer{
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnVuelos = new javax.swing.JButton();
         btnRegistros = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
         btnRutas = new javax.swing.JButton();
         btnAviones = new javax.swing.JButton();
         btnCerrarSesion = new javax.swing.JButton();
@@ -82,8 +79,6 @@ public class Administrador extends javax.swing.JFrame implements Observer{
         jLabel2.setText("Modificar Vuelos");
 
         jLabel3.setText("Registro Administrador");
-
-        jLabel4.setText("Editar Administrador");
 
         jLabel5.setText("Modificar Rutas");
 
@@ -99,8 +94,6 @@ public class Administrador extends javax.swing.JFrame implements Observer{
                 btnRegistrosActionPerformed(evt);
             }
         });
-
-        btnEditar.setText("Editar");
 
         btnRutas.setText("Rutas");
 
@@ -122,10 +115,8 @@ public class Administrador extends javax.swing.JFrame implements Observer{
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4)
                             .addComponent(btnVuelos)
-                            .addComponent(btnRegistros)
-                            .addComponent(btnEditar))
+                            .addComponent(btnRegistros))
                         .addGap(272, 272, 272)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -158,13 +149,9 @@ public class Administrador extends javax.swing.JFrame implements Observer{
                     .addComponent(btnRegistros)
                     .addComponent(btnAviones))
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
+                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnCerrarSesion))
+                .addComponent(btnCerrarSesion)
                 .addContainerGap(123, Short.MAX_VALUE))
         );
 
@@ -213,14 +200,12 @@ public class Administrador extends javax.swing.JFrame implements Observer{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAviones;
     private javax.swing.JButton btnCerrarSesion;
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnRegistros;
     private javax.swing.JButton btnRutas;
     private javax.swing.JButton btnVuelos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
