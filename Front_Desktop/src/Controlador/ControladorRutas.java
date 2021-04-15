@@ -12,7 +12,9 @@ import Vista.Principal;
 import Vista.Rutas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,6 +33,7 @@ public class ControladorRutas implements ActionListener {
 
         vRutas.setControlador(this);
         vRutas.setModelo(modelo);
+        MostrarDetalleRutas();
     }
 
     public void Regresar() {
@@ -42,17 +45,20 @@ public class ControladorRutas implements ActionListener {
     private void RegistrarRuta() {
         if (!emptyFields()) {
             String numRuta = vRutas.getTxtNumRuta().getText();
-            String origen = (String) vRutas.getCmbOrigen().getSelectedItem();
-            String destino = (String) vRutas.getCmbDestino().getSelectedItem();
-            String fechaSalida = vRutas.getTxtFechaSalida().getText();
-            String fechaLlegada = vRutas.getTxtFechaLlegada().getText();
-            //String diaSemana = vRutas.getTxtFechaSalida().get(Calendar.DAY_OF_WEEK));
-            int duracionHora = Integer.parseInt(vRutas.getTxtDuracionHoras().getText());
-            int duracionMin = Integer.parseInt(vRutas.getTxtDuracionMinutos().getText());
+            String origen = vRutas.getTxtOrigen().getText();
+            String destino = vRutas.getTxtDestino().getText();
+            String duracionHoras = vRutas.getTxtDuracionHoras().getText();
+            String duracionMinutos = vRutas.getTxtDuracionMinutos().getText();
+            String dia = (String) vRutas.getCmbSemana().getSelectedItem();
+            String horaSalida = vRutas.getTxtHoraSalida().getText();
+            String minutosSalida = vRutas.getTxtMinutosSalida().getText();
+            String fechaLlegada = "" + Integer.parseInt(duracionHoras) + Integer.parseInt(horaSalida) + ":"
+                    + Integer.parseInt(duracionMinutos) + Integer.parseInt(minutosSalida);
 
-            //Ruta ruta = new Ruta();
+            Ruta ruta = new Ruta(numRuta, origen, destino, Integer.parseInt(duracionHoras), Integer.parseInt(duracionMinutos), dia,
+                    Integer.parseInt(horaSalida), Integer.parseInt(minutosSalida), fechaLlegada);
             try {
-                //modelo.insertarRuta(ruta);
+                modelo.insertarRuta(ruta);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -64,17 +70,77 @@ public class ControladorRutas implements ActionListener {
         }
     }
 
+    private void ModificarRuta() {
+        if (!emptyFields()) {
+            String numRuta = vRutas.getTxtNumRuta().getText();
+            String origen = vRutas.getTxtOrigen().getText();
+            String destino = vRutas.getTxtDestino().getText();
+            String duracionHoras = vRutas.getTxtDuracionHoras().getText();
+            String duracionMinutos = vRutas.getTxtDuracionMinutos().getText();
+            String dia = (String) vRutas.getCmbSemana().getSelectedItem();
+            String horaSalida = vRutas.getTxtHoraSalida().getText();
+            String minutosSalida = vRutas.getTxtMinutosSalida().getText();
+            String fechaLlegada = "" + Integer.parseInt(duracionHoras) + Integer.parseInt(horaSalida) + ":"
+                    + Integer.parseInt(duracionMinutos) + Integer.parseInt(minutosSalida);
+
+            Ruta ruta = new Ruta(numRuta, origen, destino, Integer.parseInt(duracionHoras), Integer.parseInt(duracionMinutos), dia,
+                    Integer.parseInt(horaSalida), Integer.parseInt(minutosSalida), fechaLlegada);
+            try {
+                modelo.modificarRuta(ruta);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            JOptionPane.showMessageDialog(null, "Ruta modificada correctamente.");
+
+        }//CIERRE IF
+        else {
+            JOptionPane.showMessageDialog(null, "Campos no válidos");
+        }
+    }
+
+    private void EliminarRuta() {
+        String numRuta = vRutas.getTxtNumRuta().getText();
+        try {
+            modelo.eliminarRuta(numRuta);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
     public boolean emptyFields() {
         if (vRutas.getTxtNumRuta().getText().equals("")
-                || vRutas.getCmbOrigen().toString().isEmpty()
-                || vRutas.getCmbDestino().toString().isEmpty()
+                || vRutas.getTxtOrigen().getText().equals("")
+                || vRutas.getTxtDestino().getText().equals("")
                 || vRutas.getTxtDuracionHoras().getText().equals("")
                 || vRutas.getTxtDuracionMinutos().getText().equals("")
-                || vRutas.getTxtFechaSalida().getText().equals("")
-                || vRutas.getTxtFechaLlegada().getText().equals("")) {
+                || vRutas.getCmbSemana().toString().isEmpty()
+                || vRutas.getTxtHoraSalida().getText().equals("")
+                || vRutas.getTxtMinutosSalida().getText().equals("")) {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void MostrarDetalleRutas() {
+        ArrayList<Ruta> detallesRutas = modelo.listarRutas();
+        if ((detallesRutas != null) && (!detallesRutas.isEmpty())) {
+            String[] nombreColumnas = {"#Ruta", "Origen", "Destino", "Duracion Horas", "Duracion Minutos", "Dia", "Hora Salida", "Minutos Salida",};
+            DefaultTableModel tableModel = new DefaultTableModel(null, nombreColumnas);
+            Object[] fila = new Object[tableModel.getColumnCount()];
+            for (Ruta detalle : detallesRutas) {
+                fila[0] = detalle.getIdRuta();
+                fila[1] = detalle.getOrigen();
+                fila[2] = detalle.getDestino();
+                fila[3] = detalle.getDuracionHoras();
+                fila[4] = detalle.getDuracionMinutos();
+                fila[5] = detalle.getDiaSemana();
+                fila[6] = detalle.getHora();
+                fila[7] = detalle.getMinutos();
+                tableModel.addRow(fila);
+            }
+            vRutas.getTableRutas().setModel(tableModel);
         }
     }
 
@@ -88,10 +154,10 @@ public class ControladorRutas implements ActionListener {
                 Regresar();
                 break;
             case "Modificar":
-
+                ModificarRuta();
                 break;
             case "Eliminar":
-
+                EliminarRuta();
                 break;
 
         }

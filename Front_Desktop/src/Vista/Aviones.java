@@ -10,7 +10,9 @@ import Modelo.Modelo;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -23,7 +25,19 @@ public class Aviones extends javax.swing.JFrame implements Observer{
     
     public Aviones() {
         initComponents();
+        configurarComponentes();
     }
+    
+    private void configurarComponentes(){
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);        
+    }
+
+    public JTable getTableAviones() {
+        return tableAviones;
+    }
+    
 
     public JTextField getTxtAnioAvion() {
         return txtAnioAvion;
@@ -155,6 +169,11 @@ public class Aviones extends javax.swing.JFrame implements Observer{
                 "ID Avion", "Marca", "Modelo", "Year"
             }
         ));
+        tableAviones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableAvionesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableAviones);
 
         btnAgregar.setText("Agregar");
@@ -306,6 +325,20 @@ public class Aviones extends javax.swing.JFrame implements Observer{
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void tableAvionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAvionesMouseClicked
+        // TODO add your handling code here:
+        int seleccionar = tableAviones.rowAtPoint(evt.getPoint());
+        txtIdAvion.setText(String.valueOf(tableAviones.getValueAt(seleccionar, 0)));
+        txtMarcaAvion.setText(String.valueOf(tableAviones.getValueAt(seleccionar, 1)));
+        txtModeloAvion.setText(String.valueOf(tableAviones.getValueAt(seleccionar, 2)));
+        txtAnioAvion.setText(String.valueOf(tableAviones.getValueAt(seleccionar, 3)));
+        numPasajeros.setText(String.valueOf(tableAviones.getValueAt(seleccionar, 4)));
+        numFilas.setText(String.valueOf(tableAviones.getValueAt(seleccionar, 5)));
+        numAsientos.setText(String.valueOf(tableAviones.getValueAt(seleccionar, 6)));
+        
+        
+    }//GEN-LAST:event_tableAvionesMouseClicked
 
     /**
      * @param args the command line arguments
